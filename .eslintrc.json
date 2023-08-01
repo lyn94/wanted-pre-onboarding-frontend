@@ -1,0 +1,5 @@
+{
+  "root": true,
+  "plugins": ["prettier", "import", "react"],
+  "extends": ["plugin:import/recommended", "plugin:react/recommended"]
+}
