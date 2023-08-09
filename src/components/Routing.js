@@ -1,11 +1,22 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, redirect, useLocation, useNavigate } from "react-router-dom";
 import Home from "../pages/Home";
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
 import Todo from "../pages/Todo";
 
 const Routing = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/signin" || location.pathname === "/signup") {
+      if (localStorage.getItem("access_token")) {
+        alert("로그인 상태입니다.");
+        navigate("/todo");
+      }
+    }
+    console.log(location.pathname);
+  }, [location]);
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
