@@ -15,6 +15,12 @@ const Routing = () => {
         navigate("/todo");
       }
     }
+    if (location.pathname === "/todo") {
+      if (!localStorage.getItem("access_token")) {
+        alert("로그인 해주세요.");
+        navigate("/signin");
+      }
+    }
   }, [location]);
   return (
     <Routes>

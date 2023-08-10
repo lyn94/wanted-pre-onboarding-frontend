@@ -26,12 +26,9 @@ const SignIn = () => {
     e.preventDefault();
     auth(values, "signin")
     .then((res) => {
-      console.log(res.request.response);
-      console.log(res.data);
       if (res.status === 200) {
         localStorage.setItem("access_token", res.data.access_token);
-        alert("로그인 성공");
-        navigate("/todo");
+        alert("로그인 성공!");
       }
     })
     .catch((error) => {
@@ -40,6 +37,9 @@ const SignIn = () => {
       if (errorRes.statusCode === 404) {
         alert(errorRes.message);
       }
+    })
+    .finally(() => {
+      localStorage.getItem("access_token") && navigate("/todo");
     })
   }
   return (
