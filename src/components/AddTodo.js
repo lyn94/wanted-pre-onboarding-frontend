@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { createTodo } from "../lib/client/api/todoApi";
 
-const AddTodo = ({addToList}) => {
+const AddTodo = ({ getTodo }) => {
   const [todoText, setTodoText] = useState("");
   const onAdd = (e) => {
     e.preventDefault();
@@ -8,8 +9,15 @@ const AddTodo = ({addToList}) => {
       alert("내용을 입력해주세요.");
       return;
     }
-    addToList(todoText);
-    setTodoText("");
+    createTodo({ todo: todoText, isComplete: false })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          setTodoText("");
+          getTodo();
+        }
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <form className="flex flex-row gap-2 w-full" onSubmit={onAdd} name="addForm">

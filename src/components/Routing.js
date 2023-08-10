@@ -15,7 +15,6 @@ const Routing = () => {
         navigate("/todo");
       }
     }
-    console.log(location.pathname);
   }, [location]);
   return (
     <Routes>

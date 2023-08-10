@@ -1,45 +1,40 @@
-import React, { useState } from "react";
-import { cls } from "../lib/common/utils";
+import React, { useEffect, useState } from "react";
 import AddTodo from "../components/AddTodo";
 import TodoList from "../components/TodoList";
+import { getTodos } from "../lib/client/api/todoApi";
 
 const Todo = () => {
-  const [todoList, setTodoList] = useState([
-    { id: 1, text: "Enter your to do something.", done: true },
-    { id: 2, text: "drink a cup of coffee", done: false },
-  ]);
-  const addToList = (text) => {
-    setTodoList([
-      ...todoList,
-      {
-        id: Math.random() * 100000000,
-        text: text,
-        done: false,
-      },
-    ]);
-  };
-
-  const onComplete = (id) => {
-    setTodoList(todoList.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)));
-  };
-  const onUpdate = (e, updateValue) => {
-    e.preventDefault();
-    setTodoList(todoList.map((todo) => (todo.id === updateValue.id ? {...todo, text: updateValue.text } : todo)))
+  const [todoList, setTodoList] = useState([]);
+  const getTodo = () => {
+    getTodos()
+    .then((res) => {
+      setTodoList(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
-  const onDelete = (id) => {
-    setTodoList(todoList.filter((todo) => todo.id !== id));
-  };
+  useEffect(() => {
+    getTodo();
+  }, []);
 
   return (
     <div className="flex flex-col gap-2 justify-center mx-auto w-full">
-      <AddTodo addToList={addToList} />
-      {/* Todo list */}
+      <AddTodo getTodo={getTodo} />
       <div className="flex flex-col gap-2">
         {!todoList.length ? (
           <p>할 일을 추가해보세요.</p>
         ) : (
           todoList.map((todo) => {
-            return <TodoList key={todo.id} id={todo.id} text={todo.text} done={todo.done} onComplete={onComplete} onDelete={onDelete} onUpdate={onUpdate} />;
+            return (
+              <TodoList
+                key={todo.id}
+                id={todo.id}
+                todo={todo.todo}
+                isCompleted={todo.isCompleted}
+                getTodo={getTodo}
+              />
+            );
           })
         )}
       </div>
