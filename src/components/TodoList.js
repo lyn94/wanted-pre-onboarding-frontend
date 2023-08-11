@@ -23,7 +23,7 @@ const TodoList = ({ id, isCompleted, todo, getTodo }) => {
   const onUpdateCompleted = (e) => {
     const checked = e.target.checked;
     setEditedValue({ id, todo, isCompleted: checked });
-    updateTodo(editedValue)
+    updateTodo({ id, todo, isCompleted: checked })
       .then(() => {
         getTodo();
       })
