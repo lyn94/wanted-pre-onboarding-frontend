@@ -2,7 +2,7 @@
 
 안녕하세요, 원티드 프론트엔드 인턴십 지원자 **이유나** 입니다.
 
-### 👉 [배포링크](https://wanted-pre-onboarding-frontend-5z1w14h46-lyn94.vercel.app/)
+### 👉 [배포링크](https://wanted-pre-onboarding-frontend-lfu3n7s74-lyn94.vercel.app/)
 ## 프로젝트의 실행 방법
 1. 레포지토리 복사:
 ```
