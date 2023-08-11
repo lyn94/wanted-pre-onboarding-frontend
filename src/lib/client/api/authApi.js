@@ -1,4 +1,4 @@
-import { clientApi } from './clientApi';
+import clientApi from './clientApi';
 
 export const auth = async (data, url) => {
   return await clientApi({

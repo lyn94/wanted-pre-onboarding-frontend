@@ -84,7 +84,7 @@ const SignIn = () => {
         </div>
       </div>
       <button type="submit" data-testid="signin-button" className="p-2 bg-orange-200 transition-all hover:bg-orange-300 w-full disabled:bg-slate-300" disabled={validation.email && validation.password ? false : true}>
-        회원가입
+        로그인
       </button>
     </form>
   );
